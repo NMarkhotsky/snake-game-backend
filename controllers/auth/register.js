@@ -14,9 +14,9 @@ const register = async (req, res) => {
 
   const { rows: newUser } = await db.query(
     `
-  INSERT INTO users (id, name, password, score, count_game, token) 
-  values ($1, $2, $3, $4, $5, $6) 
-  RETURNING id, name, password, score, count_game, token`,
+  INSERT INTO users (id, name, password, token) 
+  values ($1, $2, $3, $4) 
+  RETURNING id, name, password, token`,
     [id, name, hashPassword, verificationToken]
   );
 
