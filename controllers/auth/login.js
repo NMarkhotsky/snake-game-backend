@@ -3,7 +3,7 @@ const db = require('../../db');
 const { getToken } = require('../../utils');
 
 const login = async (req, res) => {
-  const { id, name } = req.body;
+  const { id, name } = req.user;
 
   const { token } = await getToken(id);
 

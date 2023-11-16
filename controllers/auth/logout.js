@@ -9,7 +9,7 @@ const logout = async (req, res) => {
     UPDATE users
     SET token=NULL
     WHERE id=$1
-    RETURNING id, name, token`,
+    RETURNING id, name, score, token`,
     [id]
   );
 

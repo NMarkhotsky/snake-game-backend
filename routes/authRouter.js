@@ -12,4 +12,8 @@ router.post(
 
 router.post('/auth/login', authValidation.loginValidation, ctrlUsers.login);
 
+router.post('/auth/logout', authValidation.authenticate, ctrlUsers.logout);
+
+router.get('/current', authValidation.authenticate, ctrlUsers.getCurrent);
+
 module.exports = router;

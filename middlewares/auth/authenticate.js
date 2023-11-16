@@ -14,16 +14,16 @@ const authenticate = async (req, res, next) => {
   }
 
   try {
-    const { id, exp } = await jwt.verify(token, SECRET_KEY_TOKEN);
-    if (exp * 1000 < Date.now()) next(httpError(401, 'Not authorized'));
+    const { id } = await jwt.verify(token, SECRET_KEY_TOKEN);
 
     const { rows } = await db.query(
       `
-            SELECT id, name, email, token, balance, start_balance
-            FROM users
-            WHERE id=$1`,
+      SELECT id, name, score, token
+      FROM users
+      WHERE id=$1`,
       [id]
     );
+
     const user = rows[0];
 
     if (!user || !user.token || user.token !== token) {
@@ -38,4 +38,6 @@ const authenticate = async (req, res, next) => {
   }
 };
 
-module.exports = authenticate;
+module.exports = {
+  authenticate,
+};
