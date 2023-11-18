@@ -12,17 +12,16 @@ const login = async (req, res) => {
   UPDATE users 
   SET token=$1
   WHERE name=$2
-  RETURNING name, token, score, count_game`,
+  RETURNING name, token, score`,
     [token, name]
   );
 
-  const { name: dbName, token: dbToken, score, count_game } = updUser[0];
+  const { name: dbName, token: dbToken, score } = updUser[0];
 
   res.status(200).json({
     user: {
       name: dbName,
       score,
-      count_game,
     },
     token: dbToken,
   });

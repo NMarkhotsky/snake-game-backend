@@ -9,7 +9,7 @@ const app = express();
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 
-const { authRouter } = require('./routes');
+const { authRouter, gameRouter } = require('./routes');
 
 app.use(logger(formatsLogger));
 
@@ -18,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', authRouter);
+app.use('/api', gameRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' });
